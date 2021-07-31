@@ -51,6 +51,7 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
      Route::post('/logout',[userManagment::class,'logout']);
      Route::post('/snip',[userManagment::class,'snip']);
      Route::post('/user/{user}',[userManagment::class,'update']);
+     Route::post('/user/likes/{music}',[MusicController::class,'likes']);
      Route::post('/user/like/{music}',[MusicController::class,'like']);
 });
 
