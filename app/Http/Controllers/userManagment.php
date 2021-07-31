@@ -14,7 +14,14 @@ class userManagment extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    public function update(User $user,Request $request) {
+        $user->name = 'Hadeer';
+        $user->save();
+    }
+    public function snip(Request $request) {
+        $user = $request->user();
+        return $user;
+    }
     public function test() {
         return 'test';
     }
@@ -23,7 +30,7 @@ class userManagment extends Controller
         //add validation rules and check the request inputs
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required|min:8',
         ]);
         
 

@@ -13,7 +13,7 @@ class PlaylistController extends Controller
    public function create(Request $request)
    {
        $validation = Validator::make($request->all(),[
-          'name' => 'required|min:3'
+          'name' => 'required|min:3|unique:playlists'
        ]);
 
        if($validation->fails()) {
@@ -48,8 +48,8 @@ class PlaylistController extends Controller
         'message' => 'success'
        ]);
    }
-   public function show() {
-    $playlist = playlist::with('musics')->Get();	
+   public function show($playlist) {
+    $playlist = playlist::find($playlist)->musics;	
     return $playlist;
    }
 

@@ -13,6 +13,6 @@ class playlist extends Model
     protected $hidden = ['updated_at'];
 
     public function musics() {
-        return  $this->belongsToMany(Music::class, 'music_playlist');
+        return  $this->belongsToMany(Music::class, 'music_playlists');
     }
 }
