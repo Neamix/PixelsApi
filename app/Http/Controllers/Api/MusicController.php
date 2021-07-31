@@ -5,9 +5,17 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\music;
 use App\Models\musicPlaylist;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use PHPUnit\Framework\Constraint\Count;
+
+/*
+ User -> music -> like 
+ User like more than 1 
+
+*/
 
 class MusicController extends Controller
 {  
@@ -70,6 +78,15 @@ class MusicController extends Controller
         'message' => 'success'
       ]);
    }
+   public function like(User $user) {
+     $music = $user->with(['musics' => function ($query) {
+      $query->where('likes.user_id', 2);
+     }])->get();
+     return response()->json([
+       $music
+     ]);
+   }
+
 
 
 }

@@ -36,7 +36,6 @@ class User extends \TCG\Voyager\Models\User
         'created_at',
         'updated_at',
         'email_verified_at',
-        'id'
     ];
 
     /**
@@ -47,6 +46,10 @@ class User extends \TCG\Voyager\Models\User
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function musics() {
+        return $this->belongsToMany(Music::class,'likes');
+    }
     
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
