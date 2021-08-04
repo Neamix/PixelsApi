@@ -138,6 +138,7 @@ class MusicController extends Controller
         'likes' =>  $musics
      ]);
    }
+  
 
    public function like($musicid,Request $request) {
       $music = like::where(['user_id' => $request->user()->id,'music_id'=>$musicid])->get()->toArray();
@@ -147,15 +148,30 @@ class MusicController extends Controller
           'user_id' => $request->user()->id,
           'music_id' => $musicid
         ]);
-        $res = 'like';
+        $res = true;
       } else {
         like::where(['user_id' => $request->user()->id,'music_id'=>$musicid])->delete();
-        $res = 'unlike';
+        $res = false;
       }
       return response()->json([
-        'likes' =>  $res
+        'isLike' =>  $res
      ]);
    }
+
+   public function isLike($musicid,Request $request) {
+    $music = like::where(['user_id' => $request->user()->id,'music_id'=>$musicid])->get()->toArray();
+
+    if(empty($music)) {
+      
+      $res = false;
+    } else {
+      
+      $res = true;
+    }
+    return response()->json([
+      'isLike' =>  $res
+   ]);
+ }
 
 
 
