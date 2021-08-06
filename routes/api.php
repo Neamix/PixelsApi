@@ -40,10 +40,11 @@ Route::group(['middleware' => ['auth:sanctum'],'prefix'=> 'music'],function(){
 
 Route::group(['middleware' => ['auth:sanctum'],'prefix'=>'playlist'],function(){
      Route::post('/create',[PlaylistController::class,'create']);
-     Route::post('/show/{playlist}',[PlaylistController::class,'show']);
+     Route::post('/show',[PlaylistController::class,'show']);
      Route::put('/update/{playlist}',[PlaylistController::class,'update'])->whereNumber('playlist');
      Route::delete('/delete/{playlist}',[PlaylistController::class,'delete'])->whereNumber('playlist');
-     Route::get('/add/{playlistid}/{musicid}',[PlaylistController::class,'add'])->whereNumber('playlistid','musicid');
+     Route::post('/add',[PlaylistController::class,'add'])->whereNumber('playlistid','musicid');
+     Route::post('/getplaylist',[PlaylistController::class,'getPlaylist']);
 });
 
 Route::group(['middleware'=>['auth:sanctum']],function(){
