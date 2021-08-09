@@ -30,6 +30,9 @@ Route::get('/test',[userManagment::class,'test']);
 Route::get('/bundle/{category?}/{limit?}',[MusicController::class,'bundle'])->whereAlpha('category')->whereNumber('limit');
 Route::get('/show/{music}',[MusicController::class,'show'])->whereNumber('music');
 
+Route::get('/musics' , [searchController::class ,'index' ]);
+Route::get('/musics/{music}' ,[searchController::class ,'show']);
+
 
 Route::group(['middleware' => ['auth:sanctum'],'prefix'=> 'music'],function(){
      Route::post('/insert',[MusicController::class,'insert']);
