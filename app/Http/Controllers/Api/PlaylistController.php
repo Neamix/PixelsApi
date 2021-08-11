@@ -24,33 +24,24 @@ class PlaylistController extends Controller
 
    public function create(Request $request)
    {
-       /*
-           Validation
-       */
 
        $validation = Validator::make($request->all(),[
         'name' => 'required|min:3|unique:playlists'
        ]);
  
        if($validation->fails()) {
+
         return response()->json([
             'message' => 'fail',
             'validFailsMessage'=>$validation->messages()
         ]);
-       }
 
-       /*
-          Create new list
-       */
+       }
 
        $playlist = playlist::create([
         'name'    => $request->name,
         'user_id' => $request->user()->id
        ]);
-
-       /*
-          If there is a song send with the created playlist request
-       */
 
        if(isset($request->id)) {
         $userid     = $request->user()->id;
@@ -68,6 +59,7 @@ class PlaylistController extends Controller
        ]);
 
    }
+
    public function update(playlist $playlist,Request $request) {
     $playlist->fill($request->all())->save();
       return response()->json([
@@ -75,6 +67,7 @@ class PlaylistController extends Controller
       ]);
 
    }
+
    public function delete(playlist $playlist) {
     musicPlaylist::where(['playlist_id'=> $playlist->id])->delete();
     $playlist->delete();
@@ -82,7 +75,10 @@ class PlaylistController extends Controller
     'message' => 'success'
     ]);
    }
-   public function show(Request $request) {
+
+   public function show(Request $request) 
+   {
+
     $playlists = playlist::with('musics')->get()->where('user_id',$request->user()->id);
     $playlistArr = [];
 
@@ -96,6 +92,7 @@ class PlaylistController extends Controller
     else: 
         return response()->json();
     endif;
+
    }
    public function getPlaylist(Request $request) {
        $playlist = playlist::where([
@@ -133,20 +130,5 @@ class PlaylistController extends Controller
     endif;
 
    }
-
-   /*
-         Deattached
-    =====================
-    1) remove the relation between playlist and song 
-   */
-
-//    public function deattached(Request $request) {
-//        $playlistID = $request->playlist;
-//        $musicID    = $request->music;
-//        $userid     = $request->user()->id
-
-//        musicPlaylist::where([
-
-//        ]);
-//    }
+   
 }
