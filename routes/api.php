@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\playlist;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\Api\categoryController;
 use App\Http\Controllers\Api\PlaylistController;
+use App\Http\Controllers\searchController;
 use App\Http\Controllers\userManagment;
 use App\Models\category;
 
@@ -31,9 +32,8 @@ Route::get('/bundle/{category?}/{limit?}',[MusicController::class,'bundle'])->wh
 Route::get('/show/{music}',[MusicController::class,'show'])->whereNumber('music');
 
 
-
-
-
+Route::post('/musics' , [searchController::class ,'index' ]);
+Route::post('/musics/{music}' ,[searchController::class ,'show']);
 
 
 Route::group(['middleware'=>['auth:sanctum']],function(){

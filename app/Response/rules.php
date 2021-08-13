@@ -14,7 +14,6 @@ class rules
     private static $updateRules = [
         'name' => 'min:3|max:20',
         'email' => 'unique:users|email',
-        'password' => 'min:8|max:20|confirmed'
     ];
 
     private static $reset = [

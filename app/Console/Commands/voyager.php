@@ -6,28 +6,28 @@ use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 
-class response extends GeneratorCommand
+class voyager extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'make:response {name}';
+    protected $name = 'voyager:controller';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new model response';
+    protected $description = 'Create a new voyager controller';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'response';
+    protected $type = 'voyager controller';
 
     /**
      * The name of class being generated.
@@ -48,26 +48,26 @@ class response extends GeneratorCommand
      *
      * @return bool|null
      */
-    // public function fire(){
+    public function fire(){
 
-    //     $this->setRepositoryClass();
+        $this->setRepositoryClass();
 
-    //     // $path = $this->getPath($this->repositoryClass);
-        
-    //     if ($this->alreadyExists($this->getNameInput())) {
-    //         $this->error($this->type.' already exists!');
+        $path = $this->getPath($this->repositoryClass);
 
-    //         return false;
-    //     }
+        if ($this->alreadyExists($this->getNameInput())) {
+            $this->error($this->type.' already exists!');
 
-    //     $this->makeDirectory($path);
+            return false;
+        }
 
-    //     $this->files->put($path, $this->buildClass($this->repositoryClass));
+        $this->makeDirectory($path);
 
-    //     $this->info($this->type.' created successfully.');
+        $this->files->put($path, $this->buildClass($this->repositoryClass));
 
-    //     $this->line("<info>Created Repository :</info> $this->repositoryClass");
-    // }
+        $this->info($this->type.'has been sailed');
+
+        $this->line("<info>Created Repository :</info> $this->repositoryClass");
+    }
 
     /**
      * Set repository class name
@@ -113,7 +113,7 @@ class response extends GeneratorCommand
      */
     protected function getStub()
     {
-        return  base_path('stubs/response.stub');
+        return  base_path('vendor\tcg\voyager\stubs\controller.stub');
     }
     /**
      * Get the default namespace for the class.
@@ -123,7 +123,7 @@ class response extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Response';
+        return $rootNamespace . '\as';
     }
 
     /**

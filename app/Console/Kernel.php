@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\response::class,
+        \App\Console\Commands\voyager::class,
+
     ];
 
     /**
